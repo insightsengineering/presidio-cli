@@ -1,4 +1,4 @@
-from presidio_analyzer import AnalyzerEngine
+from presidio_analyzer import AnalyzerEngine, RecognizerResult
 
 
 class Line(object):
@@ -29,6 +29,30 @@ def line_generator(buffer):
     yield Line(line_no, buffer, start=cur, end=len(buffer))
 
 
+class PIIProblem(object):
+    """Represents a PII problem found by presidio-cli."""
+
+    def __init__(self, line, recognizer_result):
+        assert isinstance(recognizer_result, RecognizerResult)
+        self.recognizer_result = recognizer_result.to_dict()
+        #: Line on which the problem was found (starting at 1)
+        self.line = line
+        #: Column on which the problem was found (starting at 1)
+        self.column = self.recognizer_result["start"] + 1
+        #: Human-readable description of the problem
+        self.explanation = self.recognizer_result["analysis_explanation"]
+        #: Identifier of the rule that detected the problem
+        self.type = self.recognizer_result["entity_type"]
+
+        self.score = self.recognizer_result["score"]
+
+    @property
+    def message(self):
+        if self.explanation is not None:
+            return "{} ({})".format(self.explanation, self.type)
+        return self.type
+
+
 def _analyze(buffer, conf, filepath):
     """Analyze a text source.
     Returns a generator of LintProblem objects.
@@ -42,12 +66,12 @@ def _analyze(buffer, conf, filepath):
 
     analyzer = AnalyzerEngine()
 
-    for problem in analyzer.analyze(
-        text=buffer, entities=conf.entities, language=conf.language
-    ):
-        problem = problem.to_dict()
-        problem["file_path"] = filepath
-        yield problem
+    for line in line_generator(buffer):
+        for result in analyzer.analyze(
+            text=line.content, entities=conf.entities, language=conf.language
+        ):
+
+            yield PIIProblem(line.line_no, result)
 
 
 def analyze(input, conf, filepath=None):

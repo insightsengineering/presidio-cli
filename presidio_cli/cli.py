@@ -3,6 +3,8 @@ import os
 import sys
 import io
 import locale
+import platform
+import json
 
 
 from presidio_cli import APP_NAME, APP_DESCRIPTION
@@ -13,19 +15,13 @@ from presidio_cli.config import PresidioCLIConfig, PresidioCLIConfigError
 class Format(object):
     @staticmethod
     def parsable(problem, filename):
-        return "%(file)s:%(line)s:%(column)s: [%(score)s] %(type)s" % {
-            "file": filename,
-            "line": problem.line,
-            "column": problem.column,
-            "score": problem.score,
-            "type": problem.type,
-        }
+        return json.dumps(problem.recognizer_result)
 
     @staticmethod
     def standard(problem, filename):
         line = "  %d:%d" % (problem.line, problem.column)
         line += max(12 - len(line), 0) * " "
-        line += problem.score
+        line += str(problem.score)
         line += max(21 - len(line), 0) * " "
         line += problem.type
         if problem.explanation:
@@ -49,7 +45,7 @@ class Format(object):
     @staticmethod
     def github(problem, filename):
         line = "::"
-        line += problem.score
+        line += str(problem.score)  # TODO score to level
         line += " file=" + filename + ","
         line += "line=" + format(problem.line) + ","
         line += "col=" + format(problem.column)
@@ -64,12 +60,59 @@ class Format(object):
         return line
 
 
-def show_problems(problems, file, args_format=None, no_warn=None):
-    i = 0
+def supports_color():
+    supported_platform = not (
+        platform.system() == "Windows"
+        and not (
+            "ANSICON" in os.environ
+            or ("TERM" in os.environ and os.environ["TERM"] == "ANSI")
+        )
+    )
+    return (
+        supported_platform
+        and hasattr(sys.stdout, "isatty")
+        and sys.stdout.isatty()
+    )
+
+
+def show_problems(problems, file, args_format, no_warn):
+    max_level = 0
+    first = True
+
+    if args_format == "auto":
+        if "GITHUB_ACTIONS" in os.environ and "GITHUB_WORKFLOW" in os.environ:
+            args_format = "github"
+        elif supports_color():
+            args_format = "colored"
+
     for problem in problems:
-        print(problem)
-        i += i
-    return i
+        if no_warn and (problem.level != "error"):
+            continue
+        if args_format == "parsable":
+            print(Format.parsable(problem, file))
+        elif args_format == "github":
+            if first:
+                print("::group::%s" % file)
+                first = False
+            print(Format.github(problem, file))
+        elif args_format == "colored":
+            if first:
+                print("\033[4m%s\033[0m" % file)
+                first = False
+            print(Format.standard_color(problem, file))
+        else:
+            if first:
+                print(file)
+                first = False
+            print(Format.standard(problem, file))
+
+    if not first and args_format == "github":
+        print("::endgroup::")
+
+    if not first and args_format != "parsable":
+        print("")
+
+    return max_level
 
 
 def find_files_recursively(items, conf):
@@ -120,7 +163,7 @@ def run(argv=None):
     parser.add_argument(
         "-f",
         "--format",
-        choices=("standard", "github", "auto"),
+        choices=("standard", "github", "auto", "colored", "parsable"),
         default="auto",
         help="format for parsing output",
     )
