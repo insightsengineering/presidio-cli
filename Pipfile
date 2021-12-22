@@ -1,0 +1,8 @@
+[packages]
+presidio-analyzer = ">=2.2"
+pyyaml = ">=6"
+
+[dev-packages]
+pytest = ">=6"
+flake8= {version = ">=3.7"}
+pre_commit = ">=2"
