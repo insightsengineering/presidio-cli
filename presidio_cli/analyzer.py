@@ -1,4 +1,4 @@
-from presidio_analyzer import AnalyzerEngine, RecognizerResult
+from presidio_analyzer import RecognizerResult
 
 
 class Line(object):
@@ -46,28 +46,20 @@ class PIIProblem(object):
 
         self.score = self.recognizer_result["score"]
 
-    @property
-    def message(self):
-        if self.explanation is not None:
-            return "{} ({})".format(self.explanation, self.type)
-        return self.type
-
 
 def _analyze(buffer, conf, filepath):
     """Analyze a text source.
     Returns a generator of LintProblem objects.
-    :param buffer: buffer, string or stream to read from
-    :param conf: list, list of strings with presidio supported entities #TODO
+    :param buffer: str, string to read from
+    :param conf: presidio_cli configuration object
     :param filepath: string, string with path to file
     """
     assert hasattr(
         buffer, "__getitem__"
     ), "_run() argument must be a buffer, not a stream"
 
-    analyzer = AnalyzerEngine()
-
     for line in line_generator(buffer):
-        for result in analyzer.analyze(
+        for result in conf.analyzer.analyze(
             text=line.content, entities=conf.entities, language=conf.language
         ):
 
@@ -78,11 +70,10 @@ def analyze(input, conf, filepath=None):
     """Analyze a text source.
     Returns a generator of LintProblem objects.
     :param input: buffer, string or stream to read from
-    :param conf: list, list of strings with presidio supported entities #TODO
+    :param conf: presidio_cli configuration object
     :param filepath: string, string with path to file
     """
 
-    # TODO: Read line by line
     if isinstance(input, (bytes, str)):
         return _analyze(input, conf, filepath)
     elif hasattr(input, "read"):  # Python 2's file or Python 3's io.IOBase

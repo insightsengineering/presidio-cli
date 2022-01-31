@@ -1,7 +1,63 @@
 import pytest
+import tempfile
+import os
 
 import spacy
 from spacy.cli import download
+from presidio_cli.config import PresidioCLIConfig
+
+
+def build_temp_workspace(files):
+    tempdir = tempfile.mkdtemp(prefix="presidiocli-tests-")
+
+    for path, content in files.items():
+        path = os.path.join(tempdir, path).encode("utf-8")
+        if not os.path.exists(os.path.dirname(path)):
+            os.makedirs(os.path.dirname(path))
+
+        if type(content) is list:
+            os.mkdir(path)
+        else:
+            mode = "wb" if isinstance(content, bytes) else "w"
+            with open(path, mode) as f:
+                f.write(content)
+
+    return tempdir
+
+
+@pytest.fixture()
+def temp_workspace():
+    tmpdir = build_temp_workspace(
+        {
+            "empty.txt": "",
+            "sub/directory.txt/empty.txt": "",
+            "s/s/s/s/s/s/s/s/s/s/s/s/s/s/s/file": "Hello Paulo Santos.\n"
+            "The latest statement for your credit card account 1111-0000-1111-0000\n"
+            "was mailed to 123 Any Street, Seattle, WA 98109.\n",
+            "errorfile": "Hello Paulo Santos.\n"
+            "The latest statement for your credit card account 1111-0000-1111-0000\n"
+            "was mailed to 123 Any Street, Seattle, WA 98109.\n",
+            # non-ASCII chars
+            u"non-ascii/éçäγλνπ¥/utf-8": (
+                u"---\n"
+                u"- hétérogénéité\n"
+                u"# 19.99 €\n"
+                u"- お早う御座います。\n"
+                u"# الأَبْجَدِيَّة العَرَبِيَّة\n"
+            ).encode("utf-8"),
+            # dos line endings yaml
+            "dos.yml": "---\r\n" "credit_card: 1111-0000-1111-0000",
+        }
+    )
+    with open(os.path.join(tmpdir, "binary_file"), "wb") as fout:
+        fout.write(os.urandom(1024))
+    return tmpdir
+
+
+@pytest.fixture()
+def config():
+    config = PresidioCLIConfig(content="extends: default")
+    return config
 
 
 @pytest.fixture(scope="session")

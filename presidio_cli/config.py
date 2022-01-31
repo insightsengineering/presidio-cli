@@ -1,4 +1,3 @@
-import mimetypes
 import yaml
 import pathspec
 import os
@@ -34,11 +33,17 @@ class PresidioCLIConfig(object):
         return self.ignore and self.ignore.match_file(filepath)
 
     def is_text_file(self, filepath):
-        mime = mimetypes.guess_type(filepath)
-        if mime[0] is not None:
-            if mime[0].startswith("text"):
-                return True
-        return False
+        """
+        Detect is file is a not a binary file.
+        Based on https://stackoverflow.com/a/7392391
+        """
+
+        textchars = bytearray(
+            {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7F}
+        )
+        with open(filepath, "rb") as f:
+            # return true if it's not a binary
+            return not bool(f.read(1024).translate(None, textchars))
 
     def extend(self, base_config):
         assert isinstance(base_config, PresidioCLIConfig)
@@ -50,6 +55,9 @@ class PresidioCLIConfig(object):
         if base_config.ignore is not None:
             self.ignore = base_config.ignore
 
+        if base_config.language is not None:
+            self.language = base_config.language
+
     def parse(self, raw_content):
         try:
             conf = yaml.safe_load(raw_content)
@@ -60,6 +68,9 @@ class PresidioCLIConfig(object):
             raise PresidioCLIConfigError("invalid config: not a dict")
 
         self.entities = conf.get("entities", {})
+
+        if self.entities == {}:
+            self.entities = self.analyzer.get_supported_entities()
 
         if "treshold" in conf:
             self.treshold = conf["treshold"]
@@ -93,8 +104,10 @@ class PresidioCLIConfig(object):
         for id in self.entities:
             try:
                 assert id in self.analyzer.get_supported_entities()
-            except Exception as e:
-                raise PresidioCLIConfigError("invalid config: %s" % e)
+            except Exception:
+                raise PresidioCLIConfigError(
+                    "invalid config: no such entity %s" % id
+                )
 
 
 def get_extended_config_file(name):

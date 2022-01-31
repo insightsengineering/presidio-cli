@@ -105,6 +105,7 @@ def show_problems(problems, file, args_format, no_warn):
                 print(file)
                 first = False
             print(Format.standard(problem, file))
+        # max_level+=1
 
     if not first and args_format == "github":
         print("::endgroup::")
@@ -127,7 +128,7 @@ def find_files_recursively(items, conf):
             yield item
 
 
-def run(argv=None):
+def run():
     parser = argparse.ArgumentParser(
         prog=APP_NAME, description=APP_DESCRIPTION
     )
@@ -185,9 +186,11 @@ def run(argv=None):
             conf = PresidioCLIConfig(file=args.config_file)
         elif os.path.isfile(".presidiocli"):
             conf = PresidioCLIConfig(file=".presidiocli")
+        else:
+            conf = PresidioCLIConfig(content="extends: default")
     except PresidioCLIConfigError as e:
         print(e, file=sys.stderr)
-        sys.exit(-1)
+        sys.exit(1)
 
     if conf.locale is not None:
         locale.setlocale(locale.LC_ALL, conf.locale)
@@ -199,7 +202,7 @@ def run(argv=None):
                 problems = analyze(f, conf, filepath)
         except EnvironmentError as e:
             print(e, file=sys.stderr)
-            sys.exit(-1)
+            sys.exit(1)
         prob_num = show_problems(
             problems, file, args_format=args.format, no_warn=args.no_warnings
         )
@@ -209,7 +212,7 @@ def run(argv=None):
             problems = analyze(sys.stdin, conf, "")
         except EnvironmentError as e:
             print(e, file=sys.stderr)
-            sys.exit(-1)
+            sys.exit(1)
         prob_num = show_problems(
             problems,
             "stdin",
