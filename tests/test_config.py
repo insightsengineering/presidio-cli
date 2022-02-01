@@ -67,4 +67,5 @@ def test_run_with_ignored_path(temp_workspace):
         "ignore: |\n" "  .git\n" "  s/*\n" "  dos.yml\n"
     )
     assert new.is_file_ignored("./dos.yml")
+    assert new.is_file_ignored("./.git/hooks/README.sample")
     assert not new.is_file_ignored("notignored")

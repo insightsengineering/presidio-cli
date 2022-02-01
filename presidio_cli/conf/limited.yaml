@@ -1,0 +1,10 @@
+---
+language: en
+ignore: |
+  .git
+  *.cfg
+entities:
+  - PERSON
+  - CREDIT_CARD
+  - EMAIL_ADDRESS
+
