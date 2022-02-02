@@ -95,7 +95,7 @@ pipenv run python -m presidio_cli -d "$(cat presidio_cli/conf/limited.yaml)" tes
 
 ### Formatting output
 
-Output can be formatted using `-f` or `--format` parameter. Default format is `auto`.
+Output can be formatted using `-f` or `--format` parameter. The default format is `auto`.
 
 Available formats:
   - standard - standard output format
