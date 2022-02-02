@@ -51,7 +51,8 @@ entities:
 ```
 ## Run
 
-Run presidio_cli
+Run presidio_cli to execute [Presidio Analyzer](https://microsoft.github.io/presidio/analyzer/) 
+with specified configuration: language,  entities and ignore pre-configured files/paths.
 
 ### Configuration from a file
 
