@@ -128,7 +128,7 @@ pipenv run python -m presidio_cli -d "entities:
     - github, if run on github - environment variables `GITHUB_ACTIONS` and `GITHUB_WORKFLOW` are set
     - colored, otherwise
  
-### List all parameters
+### List of all parameters
 
 ```shell
 # inside virtual env shell
