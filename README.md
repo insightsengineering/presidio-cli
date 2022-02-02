@@ -29,7 +29,7 @@ The default configuration is taken from the `.presidiocli` file in a current dir
 
 Configuration file supports the following parameters in a yaml file:
   - language - by default only models and recognizers for `en` are available. 
-  [languages](https://microsoft.github.io/presidio/analyzer/languages/) list can be extended.
+ The list of [languages](https://microsoft.github.io/presidio/analyzer/languages/) can be extended.
   - entities - limit list of recognized entities to be listed in parameter. It is mapped directly to `presidio framework`.
   List of [supported entities](https://microsoft.github.io/presidio/supported_entities/)
   - ignore - list of ignored files/folders based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
