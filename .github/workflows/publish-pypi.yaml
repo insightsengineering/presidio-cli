@@ -40,7 +40,6 @@ jobs:
       - name: Build a binary wheel and a source tarball
         run: |
           pipenv run python -m build --sdist --wheel --outdir dist/ .
-          twine check
 
       - name: Publish distribution 📦 to TestPyPI
         uses: pypa/gh-action-pypi-publish@release/v1
