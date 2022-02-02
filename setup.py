@@ -15,8 +15,9 @@ setup(
     version="0.0.1",
     description="CLI tool that analyzes text with Presidio framework",
     author="test",
-    author_email="test@test",
+    author_email="42359321+tomszosz@users.noreply.github.com",
     url="https://github.com/insightsengineering/presidio-cli",
+    long_description=readme,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache License v2",
