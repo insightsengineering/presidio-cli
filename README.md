@@ -36,6 +36,7 @@ Configuration file support parameters in yaml file:
 
 File require at least one parameter to be set.
 
+Example yaml configuration file content
 ```yaml
 ---
 language: en
@@ -54,7 +55,10 @@ Run presidio_cli
 
 ### Configuration from file
 
-Example of running script with configuration from a file
+Example of running script with configuration from a file.
+There are two example `.yaml` configuration files in conf folder:
+  - default.yaml - ignore `.git` folder
+  - limited.yaml - limit list of entities use to only 3 of them, ignore `.git` folder and `.cfg` files.  
 
 ```shell
 # run with default configuration (file `.presidiocli`) in current folder
@@ -89,7 +93,8 @@ pipenv run python -m presidio_cli -d "$(cat presidio_cli/conf/limited.yaml)" tes
 
 ### Formatting output
 
-Output can be formatted using `-f` or `--format` parameter. Default format `auto`.
+Output can be formatted using `-f` or `--format` parameter. Default format is `auto`.
+
 Available formats:
   - standard - standard output format
   ```shell
