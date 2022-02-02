@@ -34,7 +34,7 @@ Configuration file supports the following parameters in a yaml file:
   List of [supported entities](https://microsoft.github.io/presidio/supported_entities/)
   - ignore - list of ignored files/folders based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
 
-File require at least one parameter to be set.
+Note: a file requires at least one parameter to be set.
 
 An example of yaml configuration file content:
 ```yaml
