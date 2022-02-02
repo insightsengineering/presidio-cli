@@ -55,7 +55,7 @@ Run presidio_cli
 
 ### Configuration from a file
 
-Example of running script with configuration from a file.
+An example of running script with configuration from a file.
 There are two example `.yaml` configuration files in conf folder:
   - default.yaml - ignore `.git` folder
   - limited.yaml - limit list of entities use to only 3 of them, ignore `.git` folder and `.cfg` files.  
