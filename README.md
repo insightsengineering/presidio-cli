@@ -76,7 +76,7 @@ pipenv run python -m presidio_cli -c presidio_cli/conf/limited.yaml tests/test_a
 
 ### Configuration as a parameter
 
-Example of use configuration as data in parameter
+An example of using configuration as data in parameter:
 
 ```shell
 # ignore paths .git and *.cfg
