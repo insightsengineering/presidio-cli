@@ -53,7 +53,7 @@ entities:
 
 Run presidio_cli
 
-### Configuration from file
+### Configuration from a file
 
 Example of running script with configuration from a file.
 There are two example `.yaml` configuration files in conf folder:
