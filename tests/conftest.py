@@ -32,10 +32,13 @@ def temp_workspace():
             "empty.txt": "",
             "sub/directory.txt/empty.txt": "",
             "s/s/s/s/s/s/s/s/s/s/s/s/s/s/s/file": "Hello Paulo Santos.\n"
-            "The latest statement for your credit card account 1111-0000-1111-0000\n"
+            "The latest statement for your credit card account 4111 1111 1111 1111\n"
             "was mailed to 123 Any Street, Seattle, WA 98109.\n",
             "errorfile": "Hello Paulo Santos.\n"
-            "The latest statement for your credit card account 1111-0000-1111-0000\n"
+            "The latest statement for your credit card account 122000000000003\n"
+            "The latest statement for 55-5555-5555-5544-44\n"
+            "The fake card example from presidio test 5555 5555 5555 44 44"
+            "The latest statement for 5555555555554444\n"
             "was mailed to 123 Any Street, Seattle, WA 98109.\n",
             # non-ASCII chars
             u"non-ascii/éçäγλνπ¥/utf-8": (
@@ -46,7 +49,7 @@ def temp_workspace():
                 u"# الأَبْجَدِيَّة العَرَبِيَّة\n"
             ).encode("utf-8"),
             # dos line endings yaml
-            "dos.yml": "---\r\n" "credit_card: 1111-0000-1111-0000",
+            "dos.yml": "---\r\n" "credit_card: 122000000000003",
         }
     )
     with open(os.path.join(tmpdir, "binary_file"), "wb") as fout:

@@ -73,7 +73,9 @@ def analyze(input, conf, filepath=None):
     :param conf: presidio_cli configuration object
     :param filepath: string, string with path to file
     """
-
+    
+    if conf.is_file_ignored(filepath):
+        return tuple()
     if isinstance(input, (bytes, str)):
         return _analyze(input, conf, filepath)
     elif hasattr(input, "read"):  # Python 2's file or Python 3's io.IOBase
