@@ -91,32 +91,38 @@ pipenv run python -m presidio_cli -d "$(cat presidio_cli/conf/limited.yaml)" tes
 
 Output can be formatted using `-f` or `--format` parameter. Default format `auto`.
 Available formats:
-  - standard - 
+  - standard - standard output format
   ```shell
-$ tests/conftest.py
-$  34:58     0.85     PERSON
-$  37:33     0.85     PERSON
+pipenv run python -m presidio_cli -d "entities:
+  - PERSON" -f standard tests/conftest.py
+# result
+tests/conftest.py
+  34:58     0.85     PERSON
+  37:33     0.85     PERSON
 ```
-  - github - 
+  - github - a little bit like a diff
   ```shell
-$ ::group::tests/conftest.py
-$ ::0.85 file=tests/conftest.py,line=34,col=58::34:58 [PERSON] 
-$ ::0.85 file=tests/conftest.py,line=37,col=33::37:33 [PERSON] 
-$ ::endgroup::
+pipenv run python -m presidio_cli -d "entities:
+  - PERSON" -f github tests/conftest.py
+# result
+::group::tests/conftest.py
+::0.85 file=tests/conftest.py,line=34,col=58::34:58 [PERSON] 
+::0.85 file=tests/conftest.py,line=37,col=33::37:33 [PERSON] 
+::endgroup::
   ```
-  - auto - 
-  - colored
-  - parsable - ```shell 
-  $ {"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
-  ```
-
+  - colored - like a standard but with colors
+  - parsable - easy to parse automaticaly
 ```shell
 pipenv run python -m presidio_cli -d "entities:
   - PERSON" -f parsable tests/conftest.py
-$ {"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
-$ {"entity_type": "PERSON", "start": 32, "end": 37, "score": 0.85, "analysis_explanation": null}
+# result
+{"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
+{"entity_type": "PERSON", "start": 32, "end": 37, "score": 0.85, "analysis_explanation": null}
 ```
-
+  - auto - default format, switch automatically between those 2 modes:
+    - github, if run on github - environment variables `GITHUB_ACTIONS` and `GITHUB_WORKFLOW` are set
+    - colored, otherwise
+ 
 ### List all parameters
 
 ```shell
