@@ -84,7 +84,7 @@ pipenv run python -m presidio_cli -d "ignore: |
   .git
   *.cfg" tests/
 
-# limit list of entieties to CREDIT_CARD
+# limit list of entities to CREDIT_CARD
 pipenv run python -m presidio_cli -d "entities:
   - CREDIT_CARD" tests/
 
