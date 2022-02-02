@@ -107,7 +107,7 @@ tests/conftest.py
   34:58     0.85     PERSON
   37:33     0.85     PERSON
 ```
-  - github - little bit like a diff
+  - github - similar to diff function in github
   ```shell
 pipenv run python -m presidio_cli -d "entities:
   - PERSON" -f github tests/conftest.py
