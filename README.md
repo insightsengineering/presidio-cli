@@ -16,7 +16,7 @@ pipenv --version
 pip install pipenv
 ```
 
-## Install `presidio_cli` module to the virtual env
+## Install `presidio_cli` module in a virtual env
 
 ```shell
 # install required apps
