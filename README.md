@@ -60,7 +60,7 @@ An example of running script with configuration from a file.
 
 There are two example `.yaml` configuration files in config folder:
   - default.yaml - ignore `.git` folder
-  - limited.yaml - limit list of entities use to only 3 of them, ignore `.git` folder and `.cfg` files.  
+  - limited.yaml - limit list of entities used to only 3 of them, ignore `.git` folder and `.cfg` files.  
 
 ```shell
 # run with default configuration (file `.presidiocli`) in current folder
