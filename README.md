@@ -4,7 +4,7 @@ CLI tool that analyzes text for PII Entities with [Microsoft Presidio framework]
 
 ## Prerequisities
 
-`Python` version: 3.8, 3.9, 3.10
+`Python` version: 3.7, 3.8, 3.9, 3.10
 
 `pipenv` app installed:
 
