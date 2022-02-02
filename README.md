@@ -28,15 +28,19 @@ pipenv install --deploy --dev
 The default configuration is taken from the `.presidiocli` file in a current directory.
 
 Configuration file supports the following parameters in a yaml file:
-  - language - by default only models and recognizers for `en` are available. 
+
+- language - by default only models and recognizers for `en` are available.
  The list of [languages](https://microsoft.github.io/presidio/analyzer/languages/) can be extended.
-  - entities - limit list of recognized entities to be listed in parameter. It is mapped directly to `presidio framework`.
+
+- entities - limit list of recognized entities to be listed in parameter. It is mapped directly to `presidio framework`.
   List of [supported entities](https://microsoft.github.io/presidio/supported_entities/)
-  - ignore - list of ignored files/folders based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
+
+- ignore - list of ignored files/folders based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
 
 Note: a file requires at least one parameter to be set.
 
 An example of yaml configuration file content:
+
 ```yaml
 ---
 language: en
@@ -49,6 +53,7 @@ entities:
   - EMAIL_ADDRESS
 
 ```
+
 ## Run presidio_cli
 
 Run presidio_cli to execute [Presidio Analyzer](https://microsoft.github.io/presidio/analyzer/) 
@@ -59,8 +64,9 @@ with specified configuration: language,  entities and ignore pre-configured file
 An example of running script with configuration from a file.
 
 There are two example `.yaml` configuration files in config folder:
-  - default.yaml - ignore `.git` folder
-  - limited.yaml - limit list of entities used to only 3 of them, ignore `.git` folder and `.cfg` files.  
+
+- default.yaml - ignore `.git` folder
+- limited.yaml - limit list of entities used to only 3 of them, ignore `.git` folder and `.cfg` files.  
 
 ```shell
 # run with default configuration (file `.presidiocli`) in current folder
@@ -98,8 +104,10 @@ pipenv run python -m presidio_cli -d "$(cat presidio_cli/conf/limited.yaml)" tes
 Output can be formatted using `-f` or `--format` parameter. The default format is `auto`.
 
 Available formats:
-  - standard - standard output format
-  ```shell
+
+- standard - standard output format
+
+```shell
 pipenv run python -m presidio_cli -d "entities:
   - PERSON" -f standard tests/conftest.py
 # result
@@ -107,8 +115,10 @@ tests/conftest.py
   34:58     0.85     PERSON
   37:33     0.85     PERSON
 ```
-  - github - similar to diff function in github
-  ```shell
+
+- github - similar to diff function in github
+
+```shell
 pipenv run python -m presidio_cli -d "entities:
   - PERSON" -f github tests/conftest.py
 # result
@@ -116,9 +126,12 @@ pipenv run python -m presidio_cli -d "entities:
 ::0.85 file=tests/conftest.py,line=34,col=58::34:58 [PERSON] 
 ::0.85 file=tests/conftest.py,line=37,col=33::37:33 [PERSON] 
 ::endgroup::
-  ```
-  - colored - standard output format but with colors
-  - parsable - easy to parse automaticaly
+```
+
+- colored - standard output format but with colors
+
+- parsable - easy to parse automaticaly
+
 ```shell
 pipenv run python -m presidio_cli -d "entities:
   - PERSON" -f parsable tests/conftest.py
@@ -126,10 +139,11 @@ pipenv run python -m presidio_cli -d "entities:
 {"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
 {"entity_type": "PERSON", "start": 32, "end": 37, "score": 0.85, "analysis_explanation": null}
 ```
-  - auto - default format, switches automatically between those 2 modes:
-    - github, if run on github - environment variables `GITHUB_ACTIONS` and `GITHUB_WORKFLOW` are set
-    - colored, otherwise
- 
+
+- auto - default format, switches automatically between those 2 modes:
+  - github, if run on github - environment variables `GITHUB_ACTIONS` and `GITHUB_WORKFLOW` are set
+  - colored, otherwise
+
 ### List of all parameters
 
 ```shell

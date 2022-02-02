@@ -18,6 +18,7 @@ setup(
     author_email="42359321+tomszosz@users.noreply.github.com",
     url="https://github.com/insightsengineering/presidio-cli",
     long_description=readme,
+    long_description_content_type="text/markdown",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache License v2",
