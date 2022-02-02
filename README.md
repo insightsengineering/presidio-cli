@@ -126,7 +126,7 @@ pipenv run python -m presidio_cli -d "entities:
 {"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
 {"entity_type": "PERSON", "start": 32, "end": 37, "score": 0.85, "analysis_explanation": null}
 ```
-  - auto - default format, switch automatically between those 2 modes:
+  - auto - default format, switches automatically between those 2 modes:
     - github, if run on github - environment variables `GITHUB_ACTIONS` and `GITHUB_WORKFLOW` are set
     - colored, otherwise
  
