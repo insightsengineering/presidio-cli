@@ -4,10 +4,7 @@ name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
 on:
   push:
     tags:
-      - "v*"
-    branches:
-      - main
-  pull_request:
+      - "[0-9]+.[0-9]+.[0-9]+"
     branches:
       - main
 
@@ -37,11 +34,12 @@ jobs:
         run: |
           pipenv install --dev build wheel setuptools twine
 
-      - name: Build a binary wheel and a source tarball
+      - name: Build a binary wheel and a source tarball ☕
         run: |
           pipenv run python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish distribution 📦 to TestPyPI
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
