@@ -27,7 +27,7 @@ pipenv install --deploy --dev
 
 The default configuration is taken from the `.presidiocli` file in a current directory.
 
-Configuration file support parameters in yaml file:
+Configuration file supports the following parameters in a yaml file:
   - language - by default only models and recognizers for `en` are available. 
   [languages](https://microsoft.github.io/presidio/analyzer/languages/) list can be extended.
   - entities - limit list of recognized entities to be listed in parameter. It is mapped directly to `presidio framework`.
