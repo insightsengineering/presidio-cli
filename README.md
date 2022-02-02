@@ -117,7 +117,7 @@ pipenv run python -m presidio_cli -d "entities:
 ::0.85 file=tests/conftest.py,line=37,col=33::37:33 [PERSON] 
 ::endgroup::
   ```
-  - colored - like a standard but with colors
+  - colored - standard output format but with colors
   - parsable - easy to parse automaticaly
 ```shell
 pipenv run python -m presidio_cli -d "entities:
