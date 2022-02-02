@@ -31,7 +31,7 @@ jobs:
 
       - name: Install pypa/build
         run: |
-          pipenv install --dev --upgrade build wheel setuptools twine
+          pipenv install --dev build wheel setuptools twine
           pipenv run python setup.py sdist bdist_wheel
           # python -m pip install build
 
