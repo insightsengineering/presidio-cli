@@ -36,7 +36,7 @@ Configuration file support parameters in yaml file:
 
 File require at least one parameter to be set.
 
-Example yaml configuration file content
+An example of yaml configuration file content:
 ```yaml
 ---
 language: en
