@@ -25,7 +25,7 @@ pipenv install --deploy --dev
 
 ## Configuration file syntax
 
-Default configuration is taken from `.presidiocli` file in current directory.
+The default configuration is taken from the `.presidiocli` file in a current directory.
 
 Configuration file support parameters in yaml file:
   - language - by default only models and recognizers for `en` are available. 
