@@ -1,6 +1,6 @@
 # presidio_cli
 
-CLI tool that analyze Text for PII Entities with [Microsoft Presidio framework](https://github.com/microsoft/presidio).
+CLI tool that analyzes text for PII Entities with [Microsoft Presidio framework](https://github.com/microsoft/presidio).
 
 ## Prerequisities
 
