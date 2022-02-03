@@ -15,7 +15,7 @@ setup(
     version="0.0.1",
     description="CLI tool that analyzes text with Presidio framework",
     author="Dawid Rycerz, Tomasz Szoszorek",
-    author_email="42359321+tomszosz@users.noreply.github.com",
+    author_email="knightdave@protonmail.com, 42359321+tomszosz@users.noreply.github.com",
     url="https://github.com/insightsengineering/presidio-cli",
     long_description=readme,
     long_description_content_type="text/markdown",
