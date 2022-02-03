@@ -7,6 +7,9 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+"
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-n-publish:
@@ -44,7 +47,7 @@ jobs:
           pipenv run python -m build --sdist --wheel --outdir dist/ .
 
       - name: Publish distribution 📦 to TestPyPI
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        # if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
