@@ -1,4 +1,4 @@
-# presidio_cli
+# presidio-cli
 
 CLI tool that analyzes text for PII Entities with [Microsoft Presidio framework](https://github.com/microsoft/presidio).
 
@@ -16,7 +16,7 @@ pipenv --version
 pip install pipenv
 ```
 
-## Install `presidio_cli` module in a virtual env
+## Install `presidio-cli` in a virtual env
 
 ```shell
 # install required apps

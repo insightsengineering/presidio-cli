@@ -14,7 +14,7 @@ setup(
     name="presidio_cli",
     version="0.0.1",
     description="CLI tool that analyzes text with Presidio framework",
-    author="test",
+    author="Dawid Rycerz, Tomasz Szoszorek",
     author_email="42359321+tomszosz@users.noreply.github.com",
     url="https://github.com/insightsengineering/presidio-cli",
     long_description=readme,

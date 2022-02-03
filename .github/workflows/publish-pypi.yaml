@@ -28,7 +28,11 @@ jobs:
           pipenv install --deploy --dev
 
       - name: Check presidio_cli script 🚿
-        run: pipenv run python -m presidio_cli --help
+        run: |
+          pipenv run python -m presidio_cli --help
+
+      - name: Run tests ⑇
+        run: pipenv run pytest
 
       - name: Install build/wheel/twine/setuptools 🚜
         run: |
