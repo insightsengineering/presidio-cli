@@ -18,8 +18,27 @@ pip install pipenv
 
 ## Install `presidio-cli` in a virtual env
 
+### Install from Python Package Index
+
+install in current python env
+
 ```shell
-# install required apps
+python -m pip install presidio-cli
+```
+
+install required apps and presidio-cli in virtual environment
+
+```shell
+pipenv install presidio-cli
+```
+
+### Install from source
+
+```shell
+# clone from git
+git clone https://github.com/insightsengineering/presidio-cli
+cd presidio-cli
+# install required apps and presidio-cli
 pipenv install --deploy --dev
 ```
 
