@@ -31,7 +31,9 @@ jobs:
         run: pipx install pipenv
 
       - name: Install dependencies
-        run: pipenv install --deploy --dev
+        run: |
+          pipenv run python --version
+          pipenv install --deploy --dev
 
       - name: Run tests
         run: pipenv run pytest
