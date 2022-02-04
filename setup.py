@@ -29,8 +29,18 @@ setup(
     long_description=readme,
     long_description_content_type="text/markdown",
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
+    install_requires=[
+        "presidio-analyzer>=2.2",
+        "pyyaml",
+        "pathspec"
+    ],
+    trusted_host=["pypi.org"],
+    tests_require=["pytest", "flake8>=3.7.9"],
 )
