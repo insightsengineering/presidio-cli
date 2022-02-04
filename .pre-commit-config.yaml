@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: pretty-format-json
+        args: [--autofix, --no-ensure-ascii, --no-sort-keys]
+      - id: check-ast
+      - id: debug-statements
+      - id: check-docstring-first
+      - id: check-added-large-files
+        args: ["--maxkb=200"]
+      - id: no-commit-to-branch
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+  -   repo: https://github.com/ambv/black
+      rev: 21.12b0
+      hooks:
+        - id: black
+          language_version: python3
+          args: ["--line-length", "79"]
+  -   repo: https://gitlab.com/pycqa/flake8
+      rev: 3.9.2
+      hooks:
+        - id: flake8
+          args: ["--ignore=E203,W503"]
+          exclude: '^tests/.*\.py$'

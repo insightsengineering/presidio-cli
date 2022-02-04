@@ -1,0 +1,12 @@
+---
+# optional `language` parameter, default en
+language: en
+# optional `ignore` parameter - list of ignored file/folder by pattern
+ignore: |
+  .git
+  *.cfg
+# optional `entities` parameter limit list of recognized entites to listed below
+entities:
+  - PERSON
+  - CREDIT_CARD
+  - EMAIL_ADDRESS

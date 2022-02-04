@@ -1,0 +1,39 @@
+---
+name: Test Python package
+on:
+  push:
+    tags:
+      - "*"
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Run in all these versions of Python
+        python-version: ["3.8", "3.9", "3.10"]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pipenv'
+
+      - name: Install pipenv
+        run: pipx install pipenv
+
+      - name: Install dependencies
+        run: |
+          pipenv run python --version
+          pipenv install --deploy --dev
+
+      - name: Run tests
+        run: pipenv run pytest
