@@ -2,7 +2,7 @@
 
 
 APP_NAME = "presidio_cli"
-APP_VERSION = "0.0.2a2"
+APP_VERSION = "0.0.3"
 APP_DESCRIPTION = __doc__
 
 __author__ = u"Dawid Rycerz, Tomasz Szoszorek"
