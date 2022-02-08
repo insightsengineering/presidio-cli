@@ -42,6 +42,15 @@ cd presidio-cli
 pipenv install --deploy --dev
 ```
 
+## Install language models for `spacy`
+
+Load models for `en` language, details on site [models](https://spacy.io/models/en)
+
+```shell
+python -m spacy download en_core_web_sm
+python -m spacy download en_core_web_lg
+```
+
 ## Configuration file syntax
 
 The default configuration is taken from the `.presidiocli` file in a current directory.
