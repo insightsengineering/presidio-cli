@@ -37,3 +37,8 @@ jobs:
 
       - name: Run tests
         run: pipenv run pytest
+
+      - name: Check shell commands availibility
+        run: |
+          pipenv run python -m presidio_cli --help
+          pipenv run python presidio --help

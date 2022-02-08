@@ -30,6 +30,7 @@ jobs:
       - name: Check presidio_cli script 🚿
         run: |
           pipenv run python -m presidio_cli --help
+          pipenv run python presidio --help
 
       - name: Run tests ⑇
         run: pipenv run pytest
