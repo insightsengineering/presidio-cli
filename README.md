@@ -42,7 +42,7 @@ cd presidio-cli
 pipenv install --deploy --dev
 ```
 
-## Install language models for `spacy`
+## Install language models for `spaCy`
 
 Load models for `en` language, details on site [models](https://spacy.io/models/en)
 
