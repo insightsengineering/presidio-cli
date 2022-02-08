@@ -44,7 +44,7 @@ pipenv install --deploy --dev
 
 ## Install language models for `spaCy`
 
-Load models for `en` language, details on site [models](https://spacy.io/models/en)
+Load models for the English (en) language using the command presented below. For further information please visit section [models](https://spacy.io/models/en).
 
 ```shell
 python -m spacy download en_core_web_sm
