@@ -41,4 +41,4 @@ jobs:
       - name: Check shell commands availibility
         run: |
           pipenv run python -m presidio_cli --help
-          pipenv run python presidio --help
+          pipenv run presidio --help
