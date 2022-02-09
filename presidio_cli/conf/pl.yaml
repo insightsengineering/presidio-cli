@@ -1,0 +1,5 @@
+---
+language: pl
+locale: pl_PL.UTF-8
+ignore: |
+  .git

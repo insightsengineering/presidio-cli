@@ -63,10 +63,54 @@ def config():
     return config
 
 
+@pytest.fixture()
+def config_pl():
+    config_pl = PresidioCLIConfig(content=
+#    "entities:\n"
+#        "  - OSOBA\n"
+#        "  - IP_ADDRESS\n"
+#        "  - CREDIT_CARD\n"
+        "treshold: 1.0\n"
+        "language: pl\n"
+        "locale: pl_PL.UTF-8\n"
+        )
+    return config_pl
+
+@pytest.fixture()
+def config_es():
+    config_es = PresidioCLIConfig(content=
+        "treshold: 1.0\n"
+        "language: es\n"
+        )
+    return config_es
+
+
 @pytest.fixture(scope="session")
 def en_core_web_lg():
     try:
         spacy.load("en_core_web_lg")
     except OSError:
-        # downloads model if is not instlled yet
+        # downloads model if is not installed yet
         print(download("en_core_web_lg"))
+
+
+@pytest.fixture(scope="session")
+def pl_core_news_lg():
+    try:
+        spacy.load("pl_core_news_lg")
+    except OSError:
+        # downloads model if is not installed yet
+        print(download("pl_core_news_lg"))
+#    try:
+#        spacy.load("pl_core_news_md")
+#    except OSError:
+        # downloads model if is not installed yet
+#        print(download("pl_core_news_md"))
+
+@pytest.fixture(scope="session")
+def es_core_news_lg():
+    try:
+        spacy.load("es_core_news_lg")
+    except OSError:
+        # downloads model if is not installed yet
+        print(download("es_core_news_lg"))

@@ -53,3 +53,45 @@ def test_analyze(en_core_web_lg, config):
 def test_analyze_type_error(en_core_web_lg, config):
     with pytest.raises(TypeError):
         analyze({}, config)
+
+
+def test_analyze_pl(pl_core_news_lg, config_pl):
+    result = list(
+        analyze(
+            "Mam na imię Jan Nowak a mój numer telefonu to 212-555-5555\n"
+            "Cześć, Mam na imię Jan Nowak i\n"
+            "mój email to cdarwin@hmsbeagle.org.pl\n",
+            config_pl,
+        )
+    )
+    for res in result:
+        print(f"{res.recognizer_result}")
+    assert len(result) == 6
+
+
+def test_analyze_pl_by_en(en_core_web_lg, config_pl):
+    result = list(
+        analyze(
+            "Mam na imię Jan Nowak a mój numer telefonu to 212-555-5555\n"
+            "Cześć, Mam na imię Jan Nowak i\n"
+            "mój email to cdarwin@hmsbeagle.org.pl\n",
+            config_pl,
+        )
+    )
+    for res in result:
+        print(f"{res.recognizer_result}")
+    assert len(result) == 6
+
+
+def test_analyze_es(es_core_news_lg, config_es):
+    result = list(
+        analyze(
+            "Mam na imię Jan Nowak a mój numer telefonu to 212-555-5555\n"
+            "Cześć, Mam na imię Jan Nowak i\n"
+            "mój email to cdarwin@hmsbeagle.org.pl\n",
+            config_es,
+        )
+    )
+    for res in result:
+        print(f"{res.recognizer_result}")
+    assert len(result) == 6
