@@ -42,9 +42,4 @@ setup(
     ],
     trusted_host=["pypi.org"],
     tests_require=["pytest", "flake8>=3.7.9"],
-    entry_points={
-        "console_scripts": [
-            "presidio = presidio_cli.cli:run",
-        ]
-    },
 )

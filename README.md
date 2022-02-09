@@ -182,4 +182,7 @@ python -m presidio_cli --help
 # run outside virtual env
 pipenv run python -m presidio_cli --help
 
+# run outside as shell command
+pipenv run presidio --help
+
 ```
