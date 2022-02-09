@@ -7,7 +7,7 @@ import platform
 import json
 
 
-from presidio_cli import APP_NAME, APP_DESCRIPTION
+from presidio_cli import SHELL_NAME, APP_DESCRIPTION
 from presidio_cli.analyzer import analyze
 from presidio_cli.config import PresidioCLIConfig, PresidioCLIConfigError
 
@@ -130,7 +130,7 @@ def find_files_recursively(items, conf):
 
 def run():
     parser = argparse.ArgumentParser(
-        prog=APP_NAME, description=APP_DESCRIPTION
+        prog=SHELL_NAME, description=APP_DESCRIPTION
     )
 
     files_group = parser.add_mutually_exclusive_group(required=True)

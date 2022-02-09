@@ -4,6 +4,7 @@
 APP_NAME = "presidio_cli"
 APP_VERSION = "1.0.0"
 APP_DESCRIPTION = __doc__
+SHELL_NAME = "presidio"
 
 __author__ = u"Insights Engineering"
 __author_email__=u"basel.nestcicd@roche.com"
