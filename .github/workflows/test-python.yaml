@@ -1,5 +1,5 @@
 ---
-name: Test Python package
+name: Test 🧪
 
 on:
   push:
@@ -13,6 +13,7 @@ on:
 
 jobs:
   test:
+    name: Run Tests 👟
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
