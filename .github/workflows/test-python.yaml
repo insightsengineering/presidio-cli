@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         # Run in all these versions of Python
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.10"]
 
     steps:
       - name: Checkout repo
@@ -48,7 +48,6 @@ jobs:
         with:
           pytest-coverage-path: /tmp/coverage.txt
           junitxml-path: /tmp/junit.xml
-          junitxml-title: coverage-${{ matrix.python-version }}
 
       - name: Check shell commands availibility
         run: |
