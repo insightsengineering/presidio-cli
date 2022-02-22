@@ -66,11 +66,11 @@ class PresidioCLIConfig(object):
             self.entities = self.analyzer.get_supported_entities()
 
         if "threshold" in conf:
-            if not 0 <= self.threshold <= 1:
+            if not 0 <= float(self.threshold) <= 1:
                 raise PresidioCLIConfigError(
                     f"Invalid threshold value: {self.threshold}. Threshold must be between 0 and 1"
                 )
-            self.threshold = conf["threshold"]
+            self.threshold = float(conf["threshold"])
         if "language" in conf:
             self.language = conf["language"]
         if "extends" in conf:

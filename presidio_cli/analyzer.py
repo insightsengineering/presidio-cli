@@ -61,7 +61,9 @@ def _analyze(buffer, conf):
         for result in conf.analyzer.analyze(
             text=line.content, entities=conf.entities, language=conf.language
         ):
-            yield PIIProblem(line.line_no, result)
+            p = PIIProblem(line.line_no, result)
+            if p.score >= conf.threshold:
+                yield p
 
 
 def analyze(input, conf, filepath=None):

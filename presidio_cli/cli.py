@@ -7,18 +7,18 @@ import platform
 import json
 
 
-from presidio_cli import SHELL_NAME, APP_DESCRIPTION
+from presidio_cli import SHELL_NAME, APP_DESCRIPTION, APP_VERSION
 from presidio_cli.analyzer import analyze
 from presidio_cli.config import PresidioCLIConfig, PresidioCLIConfigError
 
 
 class Format(object):
     @staticmethod
-    def parsable(problem, filename):
+    def parsable(problem):
         return json.dumps(problem.recognizer_result)
 
     @staticmethod
-    def standard(problem, filename):
+    def standard(problem):
         line = "  %d:%d" % (problem.line, problem.column)
         line += max(12 - len(line), 0) * " "
         line += str(problem.score)
@@ -29,7 +29,7 @@ class Format(object):
         return line
 
     @staticmethod
-    def standard_color(problem, filename):
+    def standard_color(problem):
         line = "  \033[2m%d:%d\033[0m" % (problem.line, problem.column)
         line += max(20 - len(line), 0) * " "
         if problem.score < 1:  # warning
@@ -45,7 +45,7 @@ class Format(object):
     @staticmethod
     def github(problem, filename):
         line = "::"
-        line += str(problem.score)  # TODO score to level
+        line += str(problem.score)
         line += " file=" + filename + ","
         line += "line=" + format(problem.line) + ","
         line += "col=" + format(problem.column)
@@ -85,7 +85,7 @@ def show_problems(problems, file, args_format, no_warn):
         if no_warn and (problem.level != "error"):
             continue
         if args_format == "parsable":
-            print(Format.parsable(problem, file))
+            print(Format.parsable(problem))
         elif args_format == "github":
             if first:
                 print("::group::%s" % file)
@@ -95,12 +95,12 @@ def show_problems(problems, file, args_format, no_warn):
             if first:
                 print("\033[4m%s\033[0m" % file)
                 first = False
-            print(Format.standard_color(problem, file))
+            print(Format.standard_color(problem))
         else:
             if first:
                 print(file)
                 first = False
-            print(Format.standard(problem, file))
+            print(Format.standard(problem))
         # max_level+=1
 
     if not first and args_format == "github":
@@ -127,6 +127,8 @@ def find_files_recursively(items, conf):
 def run():
     parser = argparse.ArgumentParser(prog=SHELL_NAME, description=APP_DESCRIPTION)
 
+    parser.add_argument("-v", "--version", action="version", version=f"v{APP_VERSION}")
+
     files_group = parser.add_mutually_exclusive_group(required=True)
     files_group.add_argument(
         "files",
@@ -147,6 +149,7 @@ def run():
         action="store",
         help="path to a custom configuration",
     )
+
     config_group.add_argument(
         "-d",
         "--config-data",

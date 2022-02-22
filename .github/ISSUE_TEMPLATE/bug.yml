@@ -34,8 +34,6 @@ body:
       label: Which version(s) of Python were you using?
       multiple: true
       options:
-        - '3.6'
-        - '3.7'
         - '3.8'
         - '3.9'
         - '3.10'
