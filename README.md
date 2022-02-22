@@ -1,5 +1,13 @@
 # Presidio CLI
 
+[![Test 🧪](https://github.com/insightsengineering/presidio-cli/actions/workflows/test-python.yaml/badge.svg)](https://github.com/insightsengineering/presidio-cli/actions/workflows/test-python.yaml)
+[![SuperLinter 🦸‍♀️](https://github.com/insightsengineering/presidio-cli/actions/workflows/lint.yaml/badge.svg)](https://github.com/insightsengineering/presidio-cli/actions/workflows/lint.yaml)
+[![PyPI license](https://img.shields.io/pypi/l/presidio-cli.svg)](https://pypi.python.org/pypi/presidio-cli/)
+[![PyPI version](https://badge.fury.io/py/presidio-cli.svg)](https://badge.fury.io/py/presidio-cli)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![PyPI download month](https://img.shields.io/pypi/dm/presidio-cli.svg)](https://pypi.python.org/pypi/presidio-cli/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/presidio-cli.svg)](https://pypi.python.org/pypi/presidio-cli/)
+
 CLI tool that analyzes text for PII Entities with [Microsoft Presidio framework](https://github.com/microsoft/presidio).
 
 ## Prerequisities
