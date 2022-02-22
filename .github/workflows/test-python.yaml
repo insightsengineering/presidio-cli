@@ -40,19 +40,14 @@ jobs:
 
       - name: Run tests
         run: |
-          pipenv run pytest --cov-report=xml --junit-xml=/tmp/junit.xml \
+          pipenv run pytest --junit-xml=/tmp/junit.xml \
             --cache-clear --cov=presidio_cli tests/ | tee /tmp/coverage.txt
 
-      - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v2
-        if: always() # always run even if the previous step fails
+      - name: Pytest coverage comment
+        uses: MishaKav/pytest-coverage-comment@main
         with:
-          report_paths: /tmp/junit.xml
-
-      - name: Comment coverage
-        uses: coroo/pytest-coverage-commentator@v1.0.2
-        with:
-          pytest-coverage: /tmp/coverage.txt
+          pytest-coverage-path: /tmp/coverage.txt
+          junitxml-path: /tmp/junit.xml
 
       - name: Check shell commands availibility
         run: |

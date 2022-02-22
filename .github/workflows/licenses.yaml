@@ -25,20 +25,17 @@ jobs:
       - name: Run deplic
         run: deplic . -o /tmp/licenses.tmp -f github
 
-      - name: Format the output
-        run: |
-          cat << EOF > /tmp/licenses.md
-          ### Dependency License Report
-          <details>
-            <summary>
-              $(cat /tmp/licenses.tmp)
-            </summary>
-            details
-          </details>
-          EOF
+      #- name: Format the output
+      #  run: |
+      #    cat << EOF > /tmp/licenses.md
+      #    ### Dependency License Report\n
+      #    <details>
+      #    $(cat /tmp/licenses.tmp)
+      #    </details>
+      #    EOF
 
-      - name: Post result
-        uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          header: license-report
-          path: /tmp/licenses.md
+      #- name: Post result
+      #  uses: marocchino/sticky-pull-request-comment@v2
+      #  with:
+      #    header: license-report
+      #    path: /tmp/licenses.md
