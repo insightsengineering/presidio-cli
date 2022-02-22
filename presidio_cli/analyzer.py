@@ -10,7 +10,7 @@ class Line(object):
 
     @property
     def content(self):
-        return self.buffer[self.start : self.end]
+        return self.buffer[self.start : self.end]  # noqa
 
 
 def line_generator(buffer):
