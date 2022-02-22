@@ -1,5 +1,5 @@
 ---
-name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Publish Python distros to PyPI + TestPyPI 📦
 
 on:
   push:
@@ -10,15 +10,16 @@ on:
 
 jobs:
   build-n-publish:
-    name: Build and publish Python distributions 📦 to PyPI and TestPyPI
+    name: Publish 📢
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-      - name: Set up Python 🐍 3.9
-        uses: actions/setup-python@v1
+      - name: Set up Python 🐍
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.9
+          python-version: "3.10"
 
       - name: Install pipenv 🚂
         run: pipx install pipenv

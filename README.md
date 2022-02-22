@@ -1,4 +1,4 @@
-# presidio-cli
+# Presidio CLI
 
 CLI tool that analyzes text for PII Entities with [Microsoft Presidio framework](https://github.com/microsoft/presidio).
 
@@ -63,7 +63,7 @@ Configuration file supports the following parameters in a yaml file:
 - entities - limit list of recognized entities to be listed in parameter. It is mapped directly to `presidio framework`.
   List of [supported entities](https://microsoft.github.io/presidio/supported_entities/)
 
-- ignore - list of ignored files/folders based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
+- ignore - list of ignored files/folders/directories based on pattern. It is recommended to ignore `Version Control` files, for example `.git`
 
 Note: a file requires at least one parameter to be set.
 
@@ -82,30 +82,29 @@ entities:
 
 ```
 
-## Run presidio_cli
+## Run the Presidio CLI
 
-Run presidio_cli to execute [Presidio Analyzer](https://microsoft.github.io/presidio/analyzer/) 
-with specified configuration: language,  entities and ignore pre-configured files/paths.
+Run the Presidio CLI to execute [Presidio Analyzer](https://microsoft.github.io/presidio/analyzer/)
+with specified configuration: language, threshold, entities and ignore pre-configured files/paths.
 
 ### Configuration from a file
 
 An example of running script with configuration from a file.
 
-There are two example `.yaml` configuration files in config folder:
+There are two example `.yaml` configuration files in the [`conf`](presidio_cli/conf) directory:
 
-- default.yaml - ignore `.git` folder
-- limited.yaml - limit list of entities used to only 3 of them, ignore `.git` folder and `.cfg` files.  
+- [default.yaml](presidio_cli/conf/default.yaml) - ignore the `.git` directory
+- [limited.yaml](presidio_cli/conf/limited.yaml) - limit list of entities used to only 3 of them, ignore `.git` directory and `.cfg` files.  
 
 ```shell
-# run with default configuration (file `.presidiocli`) in current folder
-pipenv run python -m presidio_cli .
+# run with default configuration (file `.presidiocli`) in the current directory
+presidio .
 
-# run with configuration limited.yaml in folder tests
-pipenv run python -m presidio_cli -c presidio_cli/conf/limited.yaml tests/
+# run with configuration limited.yaml in the "tests" directory
+presidio -c presidio_cli/conf/limited.yaml tests/
 
 # run with configuration limited.yaml in single file only tests/test_analyzer.py
-pipenv run python -m presidio_cli -c presidio_cli/conf/limited.yaml tests/test_analyzer.py
-
+presidio -c presidio_cli/conf/limited.yaml tests/test_analyzer.py
 ```
 
 ### Configuration as a parameter
@@ -114,17 +113,16 @@ An example of using configuration as data in parameter:
 
 ```shell
 # ignore paths .git and *.cfg
-pipenv run python -m presidio_cli -d "ignore: |
+presidio -d "ignore: |
   .git
   *.cfg" tests/
 
 # limit list of entities to CREDIT_CARD
-pipenv run python -m presidio_cli -d "entities:
+presidio-d "entities:
   - CREDIT_CARD" tests/
 
 # equivalent to use -c parameter 
-pipenv run python -m presidio_cli -d "$(cat presidio_cli/conf/limited.yaml)" tests/
-
+presidio -d "$(cat presidio_cli/conf/limited.yaml)" tests/
 ```
 
 ### Formatting output
@@ -136,7 +134,7 @@ Available formats:
 - standard - standard output format
 
 ```shell
-pipenv run python -m presidio_cli -d "entities:
+presidio -d "entities:
   - PERSON" -f standard tests/conftest.py
 # result
 tests/conftest.py
@@ -147,7 +145,7 @@ tests/conftest.py
 - github - similar to diff function in github
 
 ```shell
-pipenv run python -m presidio_cli -d "entities:
+presidio -d "entities:
   - PERSON" -f github tests/conftest.py
 # result
 ::group::tests/conftest.py
@@ -161,7 +159,7 @@ pipenv run python -m presidio_cli -d "entities:
 - parsable - easy to parse automaticaly
 
 ```shell
-pipenv run python -m presidio_cli -d "entities:
+presidio -d "entities:
   - PERSON" -f parsable tests/conftest.py
 # result
 {"entity_type": "PERSON", "start": 57, "end": 62, "score": 0.85, "analysis_explanation": null}
@@ -174,15 +172,12 @@ pipenv run python -m presidio_cli -d "entities:
 
 ### List of all parameters
 
+Simply run the following to get a list of all available options for the CLI:
+
 ```shell
-# inside virtual env shell
-pipenv shell
-python -m presidio_cli --help
-
-# run outside virtual env
-pipenv run python -m presidio_cli --help
-
-# run outside as shell command
-pipenv run presidio --help
-
+presidio --help
 ```
+
+## License
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGimunLee%2Fssafy-second-semester-webmobile-final.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FGimunLee%2Fssafy-second-semester-webmobile-final?ref=badge_large)

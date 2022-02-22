@@ -1,0 +1,44 @@
+
+---
+name: License Report ⚖
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Generate ⚙
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 🐍
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install deplic
+        run: pip install -q dep_license
+
+      - name: Run deplic
+        run: deplic . -o /tmp/licenses.tmp -f github
+
+      - name: Format the output
+        run: |
+          cat << EOF > /tmp/licenses.md
+          ### Dependency License Report
+          <details>
+            <summary>
+              $(cat /tmp/licenses.tmp)
+            </summary>
+            details
+          </details>
+          EOF
+
+      - name: Post result
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: license-report
+          path: /tmp/licenses.md

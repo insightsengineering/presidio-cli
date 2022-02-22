@@ -68,11 +68,7 @@ def supports_color():
             or ("TERM" in os.environ and os.environ["TERM"] == "ANSI")
         )
     )
-    return (
-        supported_platform
-        and hasattr(sys.stdout, "isatty")
-        and sys.stdout.isatty()
-    )
+    return supported_platform and hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
 
 
 def show_problems(problems, file, args_format, no_warn):
@@ -129,9 +125,7 @@ def find_files_recursively(items, conf):
 
 
 def run():
-    parser = argparse.ArgumentParser(
-        prog=SHELL_NAME, description=APP_DESCRIPTION
-    )
+    parser = argparse.ArgumentParser(prog=SHELL_NAME, description=APP_DESCRIPTION)
 
     files_group = parser.add_mutually_exclusive_group(required=True)
     files_group.add_argument(

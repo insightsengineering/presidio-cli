@@ -91,13 +91,9 @@ def test_run_with_config(temp_workspace, mocker):
 
 
 def test_run_with_stdin(mocker):
-    mocked_args = mocker.Mock(
-        stdin=True, config_data=None, config_file=None, files=""
-    )
+    mocked_args = mocker.Mock(stdin=True, config_data=None, config_file=None, files="")
     ec = mocker.patch("sys.exit")
-    with mocker.patch(
-        "argparse.ArgumentParser.parse_args", return_value=mocked_args
-    ):
+    with mocker.patch("argparse.ArgumentParser.parse_args", return_value=mocked_args):
         with mocker.patch("sys.stdin", StringIO("Example input")):
             cli.run()
     ec.assert_called_once_with(0)
