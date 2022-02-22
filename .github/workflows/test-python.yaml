@@ -48,6 +48,7 @@ jobs:
         with:
           pytest-coverage-path: /tmp/coverage.txt
           junitxml-path: /tmp/junit.xml
+          junitxml-title: coverage-${{ matrix.python-version }}
 
       - name: Check shell commands availibility
         run: |
