@@ -2,7 +2,7 @@
 
 
 APP_NAME = "presidio_cli"
-APP_VERSION = "0.0.5"
+APP_VERSION = "0.0.6"
 APP_DESCRIPTION = __doc__
 SHELL_NAME = "presidio"
 
