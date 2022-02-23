@@ -41,12 +41,12 @@ def temp_workspace():
             "The latest statement for 5555555555554444\n"
             "was mailed to 123 Any Street, Seattle, WA 98109.\n",
             # non-ASCII chars
-            u"non-ascii/éçäγλνπ¥/utf-8": (
-                u"---\n"
-                u"- hétérogénéité\n"
-                u"# 19.99 €\n"
-                u"- お早う御座います。\n"
-                u"# الأَبْجَدِيَّة العَرَبِيَّة\n"
+            "non-ascii/éçäγλνπ¥/utf-8": (
+                "---\n"
+                "- hétérogénéité\n"
+                "# 19.99 €\n"
+                "- お早う御座います。\n"
+                "# الأَبْجَدِيَّة العَرَبِيَّة\n"
             ).encode("utf-8"),
             # dos line endings yaml
             "dos.yml": "---\r\n" "credit_card: 122000000000003",

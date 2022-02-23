@@ -35,11 +35,7 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-        "presidio-analyzer>=2.2",
-        "pyyaml",
-        "pathspec"
-    ],
+    install_requires=["presidio-analyzer>=2.2", "pyyaml", "pathspec"],
     trusted_host=["pypi.org"],
     tests_require=["pytest", "flake8>=3.7.9"],
 )

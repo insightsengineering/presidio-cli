@@ -10,7 +10,7 @@ class Line(object):
 
     @property
     def content(self):
-        return self.buffer[self.start : self.end]
+        return self.buffer[self.start : self.end]  # noqa
 
 
 def line_generator(buffer):
@@ -43,16 +43,15 @@ class PIIProblem(object):
         self.explanation = self.recognizer_result["analysis_explanation"]
         #: Identifier of the rule that detected the problem
         self.type = self.recognizer_result["entity_type"]
-
+        # Score as a probability determined by the model
         self.score = self.recognizer_result["score"]
 
 
-def _analyze(buffer, conf, filepath):
+def _analyze(buffer, conf):
     """Analyze a text source.
-    Returns a generator of LintProblem objects.
+    Returns a generator of PIIProblem objects.
     :param buffer: str, string to read from
     :param conf: presidio_cli configuration object
-    :param filepath: string, string with path to file
     """
     assert hasattr(
         buffer, "__getitem__"
@@ -62,25 +61,26 @@ def _analyze(buffer, conf, filepath):
         for result in conf.analyzer.analyze(
             text=line.content, entities=conf.entities, language=conf.language
         ):
-
-            yield PIIProblem(line.line_no, result)
+            p = PIIProblem(line.line_no, result)
+            if p.score >= conf.threshold:
+                yield p
 
 
 def analyze(input, conf, filepath=None):
     """Analyze a text source.
-    Returns a generator of LintProblem objects.
+    Returns a generator of PIIProblem objects.
     :param input: buffer, string or stream to read from
     :param conf: presidio_cli configuration object
     :param filepath: string, string with path to file
     """
-    
+
     if conf.is_file_ignored(filepath):
         return tuple()
     if isinstance(input, (bytes, str)):
-        return _analyze(input, conf, filepath)
+        return _analyze(input, conf)
     elif hasattr(input, "read"):  # Python 2's file or Python 3's io.IOBase
         # We need to have everything in memory to parse correctly
         content = input.read()
-        return _analyze(content, conf, filepath)
+        return _analyze(content, conf)
     else:
         raise TypeError("input should be a string or a stream")

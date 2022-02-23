@@ -10,7 +10,7 @@ def test_parse_config():
         "  - PERSON\n"
         "  - IP_ADDRESS\n"
         "  - CREDIT_CARD\n"
-        "treshold: 1.0\n"
+        "threshold: 1.0\n"
         "locale: en_US.UTF-8\n"
     )
 
@@ -44,7 +44,7 @@ def test_is_file(temp_workspace, config):
     for f in [
         os.path.join(temp_workspace, "empty.txt"),
         os.path.join(temp_workspace, "sub/directory.txt/empty.txt"),
-        os.path.join(temp_workspace, u"non-ascii/éçäγλνπ¥/utf-8"),
+        os.path.join(temp_workspace, "non-ascii/éçäγλνπ¥/utf-8"),
         os.path.join(temp_workspace, "dos.yml"),
         os.path.join(temp_workspace, "s/s/s/s/s/s/s/s/s/s/s/s/s/s/s/file"),
     ]:
@@ -63,9 +63,7 @@ def test_invalid_value(temp_workspace):
 
 
 def test_run_with_ignored_path(temp_workspace):
-    new = config.PresidioCLIConfig(
-        "ignore: |\n" "  .git\n" "  s/*\n" "  dos.yml\n"
-    )
+    new = config.PresidioCLIConfig("ignore: |\n" "  .git\n" "  s/*\n" "  dos.yml\n")
     assert new.is_file_ignored("./dos.yml")
     assert new.is_file_ignored("./.git/hooks/README.sample")
     assert not new.is_file_ignored("notignored")

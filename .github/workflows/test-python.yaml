@@ -1,5 +1,6 @@
 ---
-name: Test Python package
+name: Test 🧪
+
 on:
   push:
     tags:
@@ -12,34 +13,44 @@ on:
 
 jobs:
   test:
+    name: Run Tests 👟
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         # Run in all these versions of Python
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.10"]
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo 🛎
+        uses: actions/checkout@v2
 
-      - name: Setup Python ${{ matrix.python-version }}
+      - name: Setup Python ${{ matrix.python-version }} 🐍
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
           cache: 'pipenv'
 
-      - name: Install pipenv
+      - name: Install pipenv 🗃
         run: pipx install pipenv
 
-      - name: Install dependencies
+      - name: Install dependencies 🍇
         run: |
           pipenv run python --version
           pipenv install --deploy --dev
 
-      - name: Run tests
-        run: pipenv run pytest
+      - name: Run tests 🧪
+        run: |
+          pipenv run pytest --junit-xml=/tmp/junit.xml \
+            --cache-clear --cov=presidio_cli tests/ | tee /tmp/coverage.txt
 
-      - name: Check shell commands availibility
+      - name: Post PR comment 💬
+        uses: MishaKav/pytest-coverage-comment@main
+        with:
+          pytest-coverage-path: /tmp/coverage.txt
+          junitxml-path: /tmp/junit.xml
+
+      - name: Check CLI execution 🎮
         run: |
           pipenv run python -m presidio_cli --help
           pipenv run presidio --help

@@ -11,21 +11,14 @@ class PresidioCLIConfigError(Exception):
 class PresidioCLIConfig(object):
     def __init__(self, content=None, file=None):
         assert (content is None) ^ (file is None)
-
         self.ignore = None
-
         self.locale = None
-
         self.analyzer = AnalyzerEngine()
-
-        self.treshold = None
-
+        self.threshold = 0
         self.language = "en"
-
         if file is not None:
             with open(file) as f:
                 content = f.read()
-
         self.parse(content)
         self.validate()
 
@@ -34,7 +27,7 @@ class PresidioCLIConfig(object):
 
     def is_text_file(self, filepath):
         """
-        Detect is file is a not a binary file.
+        Detect if file is a not a binary file.
         Based on https://stackoverflow.com/a/7392391
         """
 
@@ -72,8 +65,12 @@ class PresidioCLIConfig(object):
         if self.entities == {}:
             self.entities = self.analyzer.get_supported_entities()
 
-        if "treshold" in conf:
-            self.treshold = conf["treshold"]
+        if "threshold" in conf:
+            if not 0 <= float(self.threshold) <= 1:
+                raise PresidioCLIConfigError(
+                    f"Invalid threshold value: {self.threshold}. Threshold must be between 0 and 1"
+                )
+            self.threshold = float(conf["threshold"])
         if "language" in conf:
             self.language = conf["language"]
         if "extends" in conf:
@@ -105,9 +102,7 @@ class PresidioCLIConfig(object):
             try:
                 assert id in self.analyzer.get_supported_entities()
             except Exception:
-                raise PresidioCLIConfigError(
-                    "invalid config: no such entity %s" % id
-                )
+                raise PresidioCLIConfigError("invalid config: no such entity %s" % id)
 
 
 def get_extended_config_file(name):

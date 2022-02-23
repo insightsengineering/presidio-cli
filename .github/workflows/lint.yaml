@@ -1,0 +1,26 @@
+---
+name: SuperLinter 🦸‍♀️
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Lint 🧶
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code 🛎
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Lint Code Base 🧶
+        uses: github/super-linter/slim@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_BLACK: true
+          VALIDATE_PYTHON_FLAKE8: true
+          VALIDATE_YAML: true

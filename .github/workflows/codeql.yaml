@@ -1,0 +1,26 @@
+---
+name: CodeQL ✨
+
+on:
+  schedule:
+    - cron: '25 19 * * 1'
+
+jobs:
+  analyze:
+    name: Analyze 🔍
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+    - name: Checkout repository 🛎
+      uses: actions/checkout@v2
+
+    - name: Initialize CodeQL 👨‍💻
+      uses: github/codeql-action/init@v1
+      with:
+        languages: python
+
+    - name: Perform CodeQL Analysis 🌠
+      uses: github/codeql-action/analyze@v1
