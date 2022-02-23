@@ -10,12 +10,12 @@ jobs:
     name: Lint 🧶
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout Code 🛎
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Lint Code Base
+      - name: Lint Code Base 🧶
         uses: github/super-linter/slim@v4
         env:
           VALIDATE_ALL_CODEBASE: false

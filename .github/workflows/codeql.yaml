@@ -3,9 +3,9 @@ name: CodeQL ✨
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
     - cron: '25 19 * * 1'
 
@@ -18,13 +18,13 @@ jobs:
       contents: read
       security-events: write
     steps:
-    - name: Checkout repository
+    - name: Checkout repository 🛎
       uses: actions/checkout@v2
 
-    - name: Initialize CodeQL
+    - name: Initialize CodeQL 👨‍💻
       uses: github/codeql-action/init@v1
       with:
         languages: python
 
-    - name: Perform CodeQL Analysis
+    - name: Perform CodeQL Analysis 🌠
       uses: github/codeql-action/analyze@v1

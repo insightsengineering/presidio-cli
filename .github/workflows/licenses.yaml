@@ -19,10 +19,10 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install deplic
+      - name: Install deplic 👅
         run: pip install -q dep_license
 
-      - name: Run deplic
+      - name: Run deplic 🏃‍♀️
         run: deplic . -o /tmp/licenses.tmp -f github
 
       #- name: Format the output
