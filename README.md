@@ -186,6 +186,3 @@ Simply run the following to get a list of all available options for the CLI:
 presidio --help
 ```
 
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGimunLee%2Fssafy-second-semester-webmobile-final.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FGimunLee%2Fssafy-second-semester-webmobile-final?ref=badge_large)
