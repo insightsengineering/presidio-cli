@@ -23,7 +23,7 @@ body:
       label: Version
       description: What version of the software are you running?
       placeholder: v0.0.4
-      value: ""
+      value: "v0.0.4"
     validations:
       required: false
   - type: dropdown
