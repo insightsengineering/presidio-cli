@@ -122,9 +122,13 @@ def find_files_recursively(items, conf):
                         if conf.is_text_file(filepath):
                             yield filepath
                     except UnicodeDecodeError:
-                        pass  # Found non-text data
+                        pass  # Found invalid UTF-8 characters
         else:
-            yield item
+            try:
+                if conf.is_text_file(item):
+                    yield item
+            except UnicodeDecodeError:
+                pass  # Found invalid UTF-8 characters
 
 
 def run():
