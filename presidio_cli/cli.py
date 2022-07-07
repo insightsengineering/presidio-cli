@@ -193,6 +193,7 @@ def run():
     if conf.locale is not None:
         locale.setlocale(locale.LC_ALL, conf.locale)
 
+    prob_num = 0
     for file in find_files_recursively(args.files, conf):
         filepath = file[2:] if file.startswith("./") else file
         try:
