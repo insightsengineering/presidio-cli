@@ -36,7 +36,7 @@ class PresidioCLIConfig(object):
         # an exception is caught in find_files_recursively
         # and the file is not going to be processed.
         with open(filepath, newline="") as f:
-            content = f.read()
+            _ = f.read()
 
         textchars = bytearray(
             {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7F}
