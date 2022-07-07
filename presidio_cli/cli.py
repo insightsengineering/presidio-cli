@@ -118,17 +118,11 @@ def find_files_recursively(items, conf):
             for root, dirnames, filenames in os.walk(item):
                 for f in filenames:
                     filepath = os.path.join(root, f)
-                    try:
-                        if conf.is_text_file(filepath):
-                            yield filepath
-                    except UnicodeDecodeError:
-                        pass  # Found invalid UTF-8 characters
+                    if conf.is_text_file(filepath):
+                        yield filepath
         else:
-            try:
-                if conf.is_text_file(item):
-                    yield item
-            except UnicodeDecodeError:
-                pass  # Found invalid UTF-8 characters
+            if conf.is_text_file(item):
+                yield item
 
 
 def run():

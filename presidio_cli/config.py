@@ -33,10 +33,13 @@ class PresidioCLIConfig(object):
 
         # Try to read the file as UTF-8.
         # In case some invalid UTF-8 characters are found,
-        # an exception is caught in find_files_recursively
-        # and the file is not going to be processed.
-        with open(filepath, newline="") as f:
-            _ = f.read()
+        # an exception is caught and the file is not going
+        # to be processed.
+        try:
+            with open(filepath, newline="") as f:
+                _ = f.read()
+        except UnicodeDecodeError:
+            return False
 
         textchars = bytearray(
             {7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7F}
